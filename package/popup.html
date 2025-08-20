@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WhatsApp Message Sender</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <div id="content">
+    <h2 data-i18n="title">WhatsApp Message Sender</h2>
+    <p id="selectedNumber"></p>
+    <label for="countryCode" data-i18n="selectCountryCode">Select Country Code:</label>
+    <select id="countryCode">
+      <option value="+1">United States (+1)</option>
+      <option value="+44">United Kingdom (+44)</option>
+      <option value="+55">Brazil (+55)</option>
+      <!-- Add more country codes here -->
+    </select>
+    <br>
+    <input type="checkbox" id="setAsDefault">
+    <label for="setAsDefault" data-i18n="setAsDefault">Set as default</label>
+    <br>
+    <button id="sendMessage" data-i18n="sendMessage">Send WhatsApp Message</button>
+    <div id="feedback" class="hidden"></div>
+    <h3 data-i18n="recentNumbers">Recent Numbers</h3>
+    <ul id="recentNumbers"></ul>
+  </div>
+</body>
+</html>

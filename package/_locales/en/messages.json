@@ -1,0 +1,18 @@
+{
+  "extName": {
+    "message": "WhatsApp Message Sender",
+    "description": "The name of the extension"
+  },
+  "extDescription": {
+    "message": "Easily send WhatsApp messages from any web page",
+    "description": "The description of the extension"
+  },
+  "contextMenuTitle": {
+    "message": "Send WhatsApp message to %s",
+    "description": "The title of the context menu item"
+  },
+  "invalidPhoneNumber": {
+    "message": "Invalid phone number selected",
+    "description": "Error message for invalid phone number"
+  }
+}
