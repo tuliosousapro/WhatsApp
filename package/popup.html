@@ -2,29 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>WhatsApp Message Sender</title>
+  <title>WhatsApp Buddy</title>
   <link rel="stylesheet" href="popup.css">
-  <script src="popup.js" defer></script>
 </head>
 <body>
-  <div id="content">
-    <h2 data-i18n="title">WhatsApp Message Sender</h2>
-    <p id="selectedNumber"></p>
-    <label for="countryCode" data-i18n="selectCountryCode">Select Country Code:</label>
-    <select id="countryCode">
-      <option value="+1">United States (+1)</option>
-      <option value="+44">United Kingdom (+44)</option>
-      <option value="+55">Brazil (+55)</option>
-      <!-- Add more country codes here -->
-    </select>
-    <br>
-    <input type="checkbox" id="setAsDefault">
-    <label for="setAsDefault" data-i18n="setAsDefault">Set as default</label>
-    <br>
-    <button id="sendMessage" data-i18n="sendMessage">Send WhatsApp Message</button>
+  <div class="container">
+    <h2 data-i18n="title">WhatsApp Sender</h2>
+    <div class="input-group">
+      <label for="phoneNumber" data-i18n="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" placeholder="Enter or select number">
+    </div>
+    <div class="input-group">
+      <label for="countryCode" data-i18n="selectCountryCode">Country Code:</label>
+      <select id="countryCode">
+        <option value="+1">USA (+1)</option>
+        <option value="+44">UK (+44)</option>
+        <option value="+55">Brazil (+55)</option>
+        </select>
+    </div>
+    <div class="checkbox-group">
+      <input type="checkbox" id="setAsDefault">
+      <label for="setAsDefault" data-i18n="setAsDefault">Set as default</label>
+    </div>
+    <button id="sendMessage" data-i18n="sendMessage">Send Message</button>
     <div id="feedback" class="hidden"></div>
     <h3 data-i18n="recentNumbers">Recent Numbers</h3>
     <ul id="recentNumbers"></ul>
   </div>
+  <script src="popup.js"></script>
 </body>
 </html>

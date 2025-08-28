@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "__MSG_extName__",
-  "version": "1.0",
-  "description": "__MSG_extDescription__",
+  "name": "WhatsApp Buddy",
+  "version": "1.1",
+  "description": "Your buddy to keep things cool",
   "default_locale": "en",
   "permissions": [
     "contextMenus",
     "storage",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -18,25 +19,26 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js", "content_script.js"]
+      "js": ["content.js"]
     }
   ],
   "action": {
     "default_popup": "popup.html",
+    "default_title": "WhatsApp Buddy",
     "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
     }
   },
   "icons": {
-    "16": "images/icon16.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "web_accessible_resources": [
     {
-      "resources": ["images/whatsapp_icon.png"],
+      "resources": ["icons/whatsapp_icon.png"],
       "matches": ["<all_urls>"]
     }
   ]
