@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "WhatsApp Buddy",
-  "version": "1.4",
-  "description": "Your buddy to keep things cool",
+  "name": "Whats Link+ - WA Easy Sender",
+  "version": "1.5",
+  "description": "A tool to quickly open chats from any web page.",
   "default_locale": "en",
   "permissions": [
     "contextMenus",
@@ -24,7 +24,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "WhatsApp Buddy",
+    "default_title": "Whats Link+ - WA Easy Sender",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -35,5 +35,11 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["DISCLAIMER.md"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

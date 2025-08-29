@@ -1,6 +1,6 @@
-# WhatsApp Buddy
+# Whats Link+ - WA Easy Sender
 
-**WhatsApp Buddy** is a lightweight and user-friendly Chrome extension that makes it easy to send WhatsApp messages directly from your browser. Select any phone number on a webpage to quickly open a chat with your preferred settings.
+**Whats Link+** is a lightweight and user-friendly Chrome extension that makes it easy to send WhatsApp messages directly from your browser. Select any phone number on a webpage to quickly open a chat with your preferred settings.
 
 ---
 
@@ -13,7 +13,7 @@
     * Save your preferred country code and "Open with" choice as defaults with a single click.
 * **Smart Country Code Detection:** Automatically recognizes phone numbers from the US (10 digits) and Brazil (11 digits) and sets the correct country code.
 * **Recent Numbers:** Automatically saves your last 5 used numbers for quick access.
-* **Simple & Secure:** The extension is built with a focus on privacy and requires minimal permissions. It does not store any personal data besides your recent numbers and default settings.
+* **Simple & Secure:** The extension is built with a focus on privacy and requires minimal permissions.
 
 ---
 
@@ -50,3 +50,9 @@ Since this extension is not yet on the Chrome Web Store, you can install it manu
 ## License
 
 This project is licensed under the MIT License.
+
+---
+
+## Disclaimer
+
+This is an independent project and is not officially affiliated with WhatsApp or Meta. Please read the full [Legal Disclaimer](DISCLAIMER.md).

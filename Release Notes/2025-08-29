@@ -1,12 +1,28 @@
 # Release Notes
 
+## v1.5.0 - 2025-08-29
+
+This release focuses on branding, legal clarity, and user transparency to ensure the extension is safe and respectful of trademarks.
+
+### Added
+
+* A comprehensive `DISCLAIMER.md` file outlining the extension's independent status, user responsibilities, and limitation of liability.
+* A direct link to the Legal Disclaimer has been added to the popup's footer for easy user access.
+
+### Changed
+
+* **Project Renamed:** The extension is now named "Whats Link+ - WA Easy Sender".
+* The user interface and manifest have been updated to de-brand the extension, reducing direct use of trademarked names.
+
+---
+
 ## v1.4.0 - 2025-08-29
 
 This release simplifies the user experience by consolidating all settings into the main popup interface.
 
 ### Added
 
-* A **"Save Defaults"** button in the popup to store the user's preferred country code and "Open with" service.
+* A "Save Defaults" button in the popup to store the user's preferred country code and "Open with" service.
 
 ### Changed
 
@@ -20,7 +36,7 @@ This release simplifies the user experience by consolidating all settings into t
 
 ## v1.2.0 - 2025-08-29
 
-This release introduced smart country code detection to make sending messages even faster and more intuitive.
+This release introduced smart country code detection to make sending messages faster and more intuitive.
 
 ### Added
 
@@ -31,7 +47,7 @@ This release introduced smart country code detection to make sending messages ev
 
 ## v1.1.0 - 2025-08-28
 
-This was a major update that fixed critical bugs, refactored the entire codebase for stability and performance, and improved the overall user experience.
+This was a major stability update that fixed critical bugs from the initial version and refactored the entire codebase.
 
 ### Added
 
@@ -48,3 +64,10 @@ This was a major update that fixed critical bugs, refactored the entire codebase
 * Fixed a critical bug where conflicting content scripts were breaking the extension's functionality.
 * Corrected invalid manifest paths and added the required `scripting` permission.
 * Removed inefficient DOM traversal logic to prevent performance issues.
+
+---
+
+## v1.0.0 - 2025-08-28
+
+* Initial public release.
+* Basic functionality to send a WhatsApp message by selecting a number on a page via the context menu or the extension popup.

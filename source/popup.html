@@ -2,39 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>WhatsApp Buddy</title>
+  <title>Whats Link+ - WA Easy Sender</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
-    <h2 data-i18n="title">WhatsApp Sender</h2>
+    <h2>Whats Link+</h2>
     <div class="input-group">
-      <label for="phoneNumber" data-i18n="phoneNumber">Phone Number:</label>
+      <label for="phoneNumber">Phone Number:</label>
       <input type="text" id="phoneNumber" placeholder="Enter or select number">
     </div>
     <div class="input-group">
-      <label for="countryCode" data-i18n="selectCountryCode">Country Code:</label>
+      <label for="countryCode">Country Code:</label>
       <select id="countryCode"></select>
     </div>
-    
     <div class="input-group">
       <label>Open with:</label>
       <div class="radio-group">
         <input type="radio" id="serviceApi" name="whatsappService" value="api" checked>
         <label for="serviceApi">App (Desktop/Mobile)</label>
         <input type="radio" id="serviceWeb" name="whatsappService" value="web">
-        <label for="serviceWeb">WhatsApp Web</label>
+        <label for="serviceWeb">Web Interface</label>
       </div>
     </div>
-    
     <div class="button-group">
-      <button id="sendMessage" data-i18n="sendMessage">Send Message</button>
+      <button id="sendMessage">Send Message</button>
       <button id="saveDefaults">Save Defaults</button>
     </div>
-
     <div id="feedback" class="hidden"></div>
-    <h3 data-i18n="recentNumbers">Recent Numbers</h3>
+    <h3>Recent Numbers</h3>
     <ul id="recentNumbers"></ul>
+    <div class="footer">
+      <a href="DISCLAIMER.md" target="_blank">Legal Disclaimer</a>
+    </div>
   </div>
   <script src="popup.js"></script>
 </body>
