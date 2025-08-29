@@ -1,3 +1,5 @@
+// popup.js
+
 document.addEventListener('DOMContentLoaded', () => {
   loadTranslations();
   initializeCountryCode();
@@ -5,20 +7,37 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Get selected text from the active tab
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, { action: "getSelectedText" }, (response) => {
-      if (response && response.selectedText) {
-        document.getElementById('phoneNumber').value = response.selectedText;
-      }
-    });
+    // Check if the tab is valid to send a message to
+    if (tabs[0] && tabs[0].id) {
+      chrome.tabs.sendMessage(tabs[0].id, { action: "getSelectedText" }, (response) => {
+        // ADD THIS CHECK: This handles the error when the content script is not available
+        if (chrome.runtime.lastError) {
+          // You can log this for debugging, but it's not a critical error
+          console.log("Could not establish connection. This is expected on some pages.");
+          return;
+        }
+
+        // The rest of your code
+        if (response && response.selectedText) {
+          document.getElementById('phoneNumber').value = response.selectedText;
+        }
+      });
+    }
   });
 
   document.getElementById('sendMessage').addEventListener('click', sendWhatsAppMessage);
 });
 
+
+// ... (the rest of your popup.js functions remain the same)
+
 function loadTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(elem => {
     const key = elem.getAttribute('data-i18n');
-    elem.textContent = chrome.i18n.getMessage(key) || elem.textContent;
+    const message = chrome.i18n.getMessage(key);
+    if (message) {
+      elem.textContent = message;
+    }
   });
 }
 
