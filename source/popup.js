@@ -12,13 +12,22 @@ const countryCodes = [
   { name: "Portugal (+351)", value: "+351" },
 ];
 
+// List of Brazilian Area Codes (DDDs) to help with automatic detection
+const brazilianDDDs = [
+  '11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', 
+  '27', '28', '31', '32', '33', '34', '35', '37', '38', '41', '42', '43', 
+  '44', '45', '46', '47', '48', '49', '51', '53', '54', '55', '61', '62', 
+  '63', '64', '65', '66', '67', '68', '69', '71', '73', '74', '75', '77', 
+  '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '91', '92', 
+  '93', '94', '95', '96', '97', '98', '99'
+];
+
 document.addEventListener('DOMContentLoaded', () => {
-  populateCountryCodes(); // New function call
+  populateCountryCodes();
   loadTranslations();
   initializeCountryCode();
   loadRecentNumbers();
 
-  // Get selected text from the active tab
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs[0] && tabs[0].id) {
       chrome.tabs.sendMessage(tabs[0].id, { action: "getSelectedText" }, (response) => {
@@ -38,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('sendMessage').addEventListener('click', sendWhatsAppMessage);
 });
 
-// New function to populate the country code dropdown
 function populateCountryCodes() {
   const select = document.getElementById('countryCode');
   select.innerHTML = '';
@@ -50,38 +58,49 @@ function populateCountryCodes() {
   });
 }
 
-// New function to detect and set the country code
+// Updated function to detect country code with heuristics for Brazil and the US
 function detectAndSetCountryCode(number) {
   const phoneNumberInput = document.getElementById('phoneNumber');
   const countryCodeSelect = document.getElementById('countryCode');
   let detectedCode = null;
 
-  // Sort by length descending to match longer codes first (e.g., +351 before +3)
+  // 1. Check for explicit country code (e.g., +1 or +55)
   const sortedCodes = [...countryCodes].sort((a, b) => b.value.length - a.value.length);
-
   for (const country of sortedCodes) {
     if (number.startsWith(country.value)) {
       detectedCode = country.value;
-      // Remove country code and any leading space/zero from the number
       phoneNumberInput.value = number.substring(country.value.length).replace(/^0+/, '').trim();
-      break;
+      countryCodeSelect.value = detectedCode;
+      return;
     }
   }
 
-  if (detectedCode) {
+  // 2. Heuristic for US numbers (10 digits)
+  if (number.length === 10) {
+    detectedCode = "+1"; // Set to USA
     countryCodeSelect.value = detectedCode;
-  } else {
     phoneNumberInput.value = number;
+    return;
   }
+
+  // 3. Heuristic for Brazilian numbers (11 digits with valid DDD)
+  const ddd = number.substring(0, 2);
+  if (number.length === 11 && brazilianDDDs.includes(ddd)) {
+    detectedCode = "+55"; // Set to Brazil
+    countryCodeSelect.value = detectedCode;
+    phoneNumberInput.value = number;
+    return;
+  }
+
+  // 4. If no detection, just set the number
+  phoneNumberInput.value = number;
 }
 
 function loadTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(elem => {
     const key = elem.getAttribute('data-i18n');
     const message = chrome.i18n.getMessage(key);
-    if (message) {
-      elem.textContent = message;
-    }
+    if (message) elem.textContent = message;
   });
 }
 
@@ -119,18 +138,20 @@ function sendWhatsAppMessage() {
     showFeedback('Phone number is required', 'error');
     return;
   }
-  
+
   if (document.getElementById('setAsDefault').checked) {
     chrome.storage.sync.set({ defaultCountryCode: countryCode });
     chrome.runtime.sendMessage({ action: 'setDefaultCountryCode', countryCode });
   }
 
+  const fullNumber = number.startsWith('+') ? number : `${countryCode}${number}`;
+
   chrome.runtime.sendMessage({
     action: 'openWhatsApp',
-    number: number,
-    countryCode: countryCode
+    number: fullNumber,
+    countryCode: ''
   }, () => {
-    updateRecentNumbers(`${countryCode}${number}`);
+    updateRecentNumbers(fullNumber);
     showFeedback('Opening WhatsApp...', 'success');
   });
 }
