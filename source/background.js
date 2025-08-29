@@ -1,72 +1,68 @@
-// background.js
-let defaultCountryCode = "+1"; // Default to US
-
-// Initialize on install
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.get("defaultCountryCode", (data) => {
-    defaultCountryCode = data.defaultCountryCode || "+1";
-    chrome.storage.sync.set({ defaultCountryCode });
+  chrome.storage.sync.get(['defaultCountryCode', 'whatsappService'], (items) => {
+    if (!items.defaultCountryCode) {
+      chrome.storage.sync.set({ defaultCountryCode: '+1' });
+    }
+    if (!items.whatsappService) {
+      chrome.storage.sync.set({ whatsappService: 'api' });
+    }
   });
-  createContextMenu();
-});
-
-// Function to create the context menu
-function createContextMenu() {
+  
   chrome.contextMenus.create({
     id: "sendWhatsAppMessage",
     title: "Send WhatsApp message to %s",
     contexts: ["selection"]
   });
-}
+});
 
-// Handle context menu clicks
-chrome.contextMenus.onClicked.addListener((info, tab) => {
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === "sendWhatsAppMessage") {
-    const selectedText = sanitizePhoneNumber(info.selectionText);
-    if (isValidPhoneNumber(selectedText)) {
-      openWhatsAppChat(selectedText);
-    } else {
-      // Notify user of invalid number
-      chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: (message) => alert(message),
-        args: [chrome.i18n.getMessage("invalidPhoneNumber")]
-      });
-    }
+    await openWhatsAppChat(info.selectionText);
   }
 });
 
-// Handle messages from other scripts
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (request) => {
   if (request.action === "openWhatsApp") {
-    const number = sanitizePhoneNumber(request.number);
-    if (isValidPhoneNumber(number)) {
-      openWhatsAppChat(number, request.countryCode);
-      return true; // Indicates async response
-    }
-  } else if (request.action === "setDefaultCountryCode") {
-    defaultCountryCode = request.countryCode;
-    chrome.storage.sync.set({ defaultCountryCode });
+    await openWhatsAppChat(request.number);
   }
   return true;
 });
 
-// Utility functions
 function sanitizePhoneNumber(number) {
   return String(number).replace(/[^\d+]/g, '');
 }
 
-function isValidPhoneNumber(number) {
-  const cleanNumber = sanitizePhoneNumber(number);
-  // Simple regex for basic validation
-  return /^\+?\d{10,15}$/.test(cleanNumber);
-}
+async function openWhatsAppChat(number) {
+  const settings = await chrome.storage.sync.get({
+    defaultCountryCode: '+1',
+    whatsappService: 'api'
+  });
+  
+  let fullNumber = sanitizePhoneNumber(number);
 
-function openWhatsAppChat(number, countryCode = defaultCountryCode) {
-  let fullNumber = number;
   if (!fullNumber.startsWith('+')) {
-    fullNumber = `${countryCode}${fullNumber}`;
+    // This heuristic logic is simplified here. The popup has the more complex logic.
+    // For context menu, we rely on the default if no '+' is present.
+    const isTenDigit = /^\d{10}$/.test(fullNumber);
+    const isElevenDigitBrazilian = /^\d{11}$/.test(fullNumber);
+
+    if (isTenDigit) {
+      fullNumber = `+1${fullNumber}`;
+    } else if (isElevenDigitBrazilian) {
+      fullNumber = `+55${fullNumber}`;
+    } else {
+      fullNumber = `${settings.defaultCountryCode}${fullNumber}`;
+    }
   }
-  const url = `https://wa.me/${sanitizePhoneNumber(fullNumber)}`;
+
+  const sanitizedForUrl = fullNumber.replace('+', '');
+  
+  let url;
+  if (settings.whatsappService === 'web') {
+    url = `https://web.whatsapp.com/send?phone=${sanitizedForUrl}`;
+  } else {
+    url = `https://api.whatsapp.com/send?phone=${sanitizedForUrl}`;
+  }
+  
   chrome.tabs.create({ url });
 }

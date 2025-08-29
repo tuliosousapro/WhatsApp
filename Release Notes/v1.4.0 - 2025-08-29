@@ -1,0 +1,50 @@
+# Release Notes
+
+## v1.4.0 - 2025-08-29
+
+This release simplifies the user experience by consolidating all settings into the main popup interface.
+
+### Added
+
+* A **"Save Defaults"** button in the popup to store the user's preferred country code and "Open with" service.
+
+### Changed
+
+* **Settings UI Moved:** All settings have been moved from a separate options page directly into the main popup for easier and faster access.
+
+### Removed
+
+* The separate options page (`options.html` and `options.js`) has been removed to streamline the extension.
+
+---
+
+## v1.2.0 - 2025-08-29
+
+This release introduced smart country code detection to make sending messages even faster and more intuitive.
+
+### Added
+
+* **US Number Detection:** The extension now automatically recognizes 10-digit phone numbers and sets the country code to USA (+1).
+* **Brazilian Number Detection:** The extension now automatically recognizes 11-digit Brazilian mobile numbers (with a valid DDD) and sets the country code to Brazil (+55).
+
+---
+
+## v1.1.0 - 2025-08-28
+
+This was a major update that fixed critical bugs, refactored the entire codebase for stability and performance, and improved the overall user experience.
+
+### Added
+
+* The popup now automatically fetches the user-selected text from the active page.
+* User feedback is now provided directly on the page via an alert if an invalid phone number is used with the context menu.
+
+### Changed
+
+* **Refactored Core Logic:** The entire extension was rewritten to use a more stable and modern architecture.
+* **Unified Content Script:** Replaced two conflicting content scripts with a single, lightweight script.
+
+### Fixed
+
+* Fixed a critical bug where conflicting content scripts were breaking the extension's functionality.
+* Corrected invalid manifest paths and added the required `scripting` permission.
+* Removed inefficient DOM traversal logic to prevent performance issues.

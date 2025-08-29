@@ -14,14 +14,24 @@
     </div>
     <div class="input-group">
       <label for="countryCode" data-i18n="selectCountryCode">Country Code:</label>
-      <select id="countryCode">
-        </select>
+      <select id="countryCode"></select>
     </div>
-    <div class="checkbox-group">
-      <input type="checkbox" id="setAsDefault">
-      <label for="setAsDefault" data-i18n="setAsDefault">Set as default</label>
+    
+    <div class="input-group">
+      <label>Open with:</label>
+      <div class="radio-group">
+        <input type="radio" id="serviceApi" name="whatsappService" value="api" checked>
+        <label for="serviceApi">App (Desktop/Mobile)</label>
+        <input type="radio" id="serviceWeb" name="whatsappService" value="web">
+        <label for="serviceWeb">WhatsApp Web</label>
+      </div>
     </div>
-    <button id="sendMessage" data-i18n="sendMessage">Send Message</button>
+    
+    <div class="button-group">
+      <button id="sendMessage" data-i18n="sendMessage">Send Message</button>
+      <button id="saveDefaults">Save Defaults</button>
+    </div>
+
     <div id="feedback" class="hidden"></div>
     <h3 data-i18n="recentNumbers">Recent Numbers</h3>
     <ul id="recentNumbers"></ul>
