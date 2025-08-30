@@ -1,18 +1,95 @@
 {
   "extName": {
-    "message": "Whats Link+ - WA Easy Sender",
-    "description": "The name of the extension"
+    "message": "Whats Link+ - WA Easy Sender"
   },
   "extDescription": {
-    "message": "Easily send WhatsApp messages from any web page",
-    "description": "The description of the extension"
+    "message": "Easily send WhatsApp messages from any web page"
   },
   "contextMenuTitle": {
-    "message": "Send WA message to %s",
-    "description": "The title of the context menu item"
+    "message": "Send WA message to %s"
   },
   "invalidPhoneNumber": {
-    "message": "Invalid phone number selected",
-    "description": "Error message for invalid phone number"
+    "message": "Invalid phone number selected"
+  },
+  "phoneNumberLabel": {
+    "message": "Phone Number:"
+  },
+  "countryCodeLabel": {
+    "message": "Country Code:"
+  },
+  "openWithLabel": {
+    "message": "Open with:"
+  },
+  "openWithAppLabel": {
+    "message": "App (Desktop/Mobile)"
+  },
+  "openWithWebLabel": {
+    "message": "Web Interface"
+  },
+  "sendMessageButton": {
+    "message": "Send Message"
+  },
+  "saveDefaultsButton": {
+    "message": "Save Defaults"
+  },
+  "recentNumbersHeader": {
+    "message": "Recent Numbers"
+  },
+  "linkGeneratorHeader": {
+    "message": "Link Generator"
+  },
+  "prefilledMessageLabel": {
+    "message": "Pre-filled Message (Optional):"
+  },
+  "generateLinkButton": {
+    "message": "Generate Link & QR Code"
+  },
+  "copyButton": {
+    "message": "Copy"
+  },
+  "downloadButton": {
+    "message": "Download"
+  },
+  "shareButton": {
+    "message": "Share"
+  },
+  "disclaimerLink": {
+    "message": "Legal Disclaimer"
+  },
+  "phoneNumberPlaceholder": {
+    "message": "Enter or select number"
+  },
+  "prefilledMessagePlaceholder": {
+    "message": "Hello! I'm interested in your product..."
+  },
+  "feedbackRequired": {
+    "message": "Phone number is required"
+  },
+  "feedbackSaved": {
+    "message": "Defaults saved!"
+  },
+  "feedbackCopied": {
+    "message": "Link copied to clipboard!"
+  },
+  "feedbackOpening": {
+    "message": "Opening WA..."
+  },
+  "feedbackCopyError": {
+    "message": "Failed to copy link"
+  },
+  "feedbackQrError": {
+    "message": "Generate a QR code first"
+  },
+  "feedbackShareError": {
+    "message": "Could not share QR code."
+  },
+  "countryUSA": {
+    "message": "USA (+1)"
+  },
+  "countryUK": {
+    "message": "UK (+44)"
+  },
+  "countryBrazil": {
+    "message": "Brazil (+55)"
   }
 }

@@ -9,50 +9,50 @@
   <div class="container">
     <h2>Whats Link+</h2>
     <div class="input-group">
-      <label for="phoneNumber">Phone Number:</label>
-      <input type="text" id="phoneNumber" placeholder="Enter or select number">
+      <label for="phoneNumber" data-i18n="phoneNumberLabel">Phone Number:</label>
+      <input type="text" id="phoneNumber">
     </div>
     <div class="input-group">
-      <label for="countryCode">Country Code:</label>
+      <label for="countryCode" data-i18n="countryCodeLabel">Country Code:</label>
       <select id="countryCode"></select>
     </div>
     <div class="input-group">
-      <label>Open with:</label>
+      <label data-i18n="openWithLabel">Open with:</label>
       <div class="radio-group">
         <input type="radio" id="serviceApi" name="whatsappService" value="api" checked>
-        <label for="serviceApi">App (Desktop/Mobile)</label>
+        <label for="serviceApi" data-i18n="openWithAppLabel">App (Desktop/Mobile)</label>
         <input type="radio" id="serviceWeb" name="whatsappService" value="web">
-        <label for="serviceWeb">Web Interface</label>
+        <label for="serviceWeb" data-i18n="openWithWebLabel">Web Interface</label>
       </div>
     </div>
     <div class="button-group">
-      <button id="sendMessage">Send Message</button>
-      <button id="saveDefaults">Save Defaults</button>
+      <button id="sendMessage" data-i18n="sendMessageButton">Send Message</button>
+      <button id="saveDefaults" data-i18n="saveDefaultsButton">Save Defaults</button>
     </div>
     <div id="feedback" class="hidden"></div>
-    <h3>Recent Numbers</h3>
+    <h3 data-i18n="recentNumbersHeader">Recent Numbers</h3>
     <ul id="recentNumbers"></ul>
 
     <div class="link-generator">
-      <h3 class="link-generator-title">Link Generator</h3>
+      <h3 class="link-generator-title" data-i18n="linkGeneratorHeader">Link Generator</h3>
       <div class="input-group">
-        <label for="prefilledMessage">Pre-filled Message (Optional):</label>
-        <textarea id="prefilledMessage" rows="3" placeholder="Hello! I'm interested in your product..."></textarea>
+        <label for="prefilledMessage" data-i18n="prefilledMessageLabel">Pre-filled Message (Optional):</label>
+        <textarea id="prefilledMessage" rows="3"></textarea>
       </div>
-      <button id="generateLink">Generate Link & QR Code</button>
+      <button id="generateLink" data-i18n="generateLinkButton">Generate Link & QR Code</button>
       <div id="generatedLinkContainer" class="hidden">
         <input type="text" id="generatedLink" readonly>
-        <button id="copyLink">Copy</button>
+        <button id="copyLink" data-i18n="copyButton">Copy</button>
       </div>
       <div id="qrcode" class="hidden"></div>
       <div id="qrActions" class="button-group hidden">
-        <button id="downloadQr">Download</button>
-        <button id="shareQr">Share</button>
+        <button id="downloadQr" data-i18n="downloadButton">Download</button>
+        <button id="shareQr" data-i18n="shareButton">Share</button>
       </div>
     </div>
 
     <div class="footer">
-      <a href="DISCLAIMER.md" target="_blank">Legal Disclaimer</a>
+      <a href="DISCLAIMER.md" target="_blank" data-i18n="disclaimerLink">Legal Disclaimer</a>
     </div>
   </div>
   <script src="lib/qrcode.min.js"></script>
