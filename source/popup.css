@@ -141,3 +141,26 @@ textarea {
 .footer a:hover {
   text-decoration: underline;
 }
+
+#qrcode {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#downloadQr {
+  background-color: #17a2b8;
+}
+#downloadQr:hover {
+  background-color: #138496;
+}
+#shareQr {
+  background-color: #007bff;
+}
+#shareQr:hover {
+  background-color: #0069d9;
+}

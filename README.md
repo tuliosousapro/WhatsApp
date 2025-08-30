@@ -10,14 +10,19 @@
 
 ## Features
 
-* **Context Menu Integration:** Right-click on any selected phone number to instantly open a WhatsApp chat.
+* **Context Menu Integration:** Right-click on any selected phone number to instantly open a chat.
 * **All-in-One Popup:**
-    * Manually enter a phone number or use the one currently selected on the page.
-    * Choose to open chats with the **Desktop/Mobile App** (`api.whatsapp.com`) or with **WhatsApp Web** (`web.whatsapp.com`).
-    * Save your preferred country code and "Open with" choice as defaults with a single click.
-* **Smart Country Code Detection:** Automatically recognizes phone numbers from the US (10 digits) and Brazil (11 digits) and sets the correct country code.
+    * Manually enter a phone number or use one selected on the page.
+    * Choose to open chats with the **Desktop/Mobile App** or with **WhatsApp Web**.
+    * Save your preferred country code and "Open with" choice as defaults.
+* **Link & QR Code Generator:**
+    * Create shareable links for `api.whatsapp.com` or `web.whatsapp.com`.
+    * Add optional pre-filled text to your links.
+    * Instantly generate a scannable QR code for any link.
+    * **Download** the QR code as a PNG file or **Share** it using your device's native sharing menu.
+* **Smart Country Code Detection:** Automatically recognizes phone numbers from the US (10 digits) and Brazil (11 digits).
 * **Recent Numbers:** Automatically saves your last 5 used numbers for quick access.
-* **Simple & Secure:** The extension is built with a focus on privacy and requires minimal permissions.
+
 
 ---
 

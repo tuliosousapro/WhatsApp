@@ -39,10 +39,15 @@
         <label for="prefilledMessage">Pre-filled Message (Optional):</label>
         <textarea id="prefilledMessage" rows="3" placeholder="Hello! I'm interested in your product..."></textarea>
       </div>
-      <button id="generateLink">Generate Link</button>
+      <button id="generateLink">Generate Link & QR Code</button>
       <div id="generatedLinkContainer" class="hidden">
         <input type="text" id="generatedLink" readonly>
         <button id="copyLink">Copy</button>
+      </div>
+      <div id="qrcode" class="hidden"></div>
+      <div id="qrActions" class="button-group hidden">
+        <button id="downloadQr">Download</button>
+        <button id="shareQr">Share</button>
       </div>
     </div>
 
@@ -50,6 +55,7 @@
       <a href="DISCLAIMER.md" target="_blank">Legal Disclaimer</a>
     </div>
   </div>
+  <script src="lib/qrcode.min.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

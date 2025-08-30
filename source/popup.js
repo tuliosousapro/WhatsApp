@@ -6,11 +6,17 @@ const brazilianDDDs = [
   '11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', '27', '28', '31', '32', '33', '34', '35', '37', '38', '41', '42', '43', '44', '45', '46', '47', '48', '49', '51', '53', '54', '55', '61', '62', '63', '64', '65', '66', '67', '68', '69', '71', '73', '74', '75', '77', '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '91', '92', '93', '94', '95', '96', '97', '98', '99'
 ];
 
+let qrcode = null;
+
 document.addEventListener('DOMContentLoaded', () => {
   populateCountryCodes();
   loadTranslations();
   initializeDefaults();
   loadRecentNumbers();
+
+  if (!navigator.share) {
+    document.getElementById('shareQr').classList.add('hidden');
+  }
 
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs[0] && tabs[0].id) {
@@ -28,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('saveDefaults').addEventListener('click', saveDefaultSettings);
   document.getElementById('generateLink').addEventListener('click', generateWhatsAppLink);
   document.getElementById('copyLink').addEventListener('click', copyGeneratedLink);
+  document.getElementById('downloadQr').addEventListener('click', downloadQRCode);
+  document.getElementById('shareQr').addEventListener('click', shareQRCode);
 });
 
 function initializeDefaults() {
@@ -43,16 +51,11 @@ function initializeDefaults() {
 function saveDefaultSettings() {
   const defaultCountryCode = document.getElementById('countryCode').value;
   const whatsappService = document.querySelector('input[name="whatsappService"]:checked').value;
-
   chrome.storage.sync.set({
     defaultCountryCode: defaultCountryCode,
     whatsappService: whatsappService
   }, () => {
-    const button = document.getElementById('saveDefaults');
-    button.textContent = 'Saved!';
-    setTimeout(() => {
-      button.textContent = 'Save Defaults';
-    }, 1500);
+    showFeedback('Defaults saved!', 'success');
   });
 }
 
@@ -139,30 +142,77 @@ function sendWhatsAppMessage() {
 function generateWhatsAppLink() {
   const fullNumber = getFullNumber();
   if (!fullNumber) return;
+
   const prefilledMessage = document.getElementById('prefilledMessage').value;
   const sanitizedNumber = fullNumber.replace(/[^\d]/g, '');
-  let link = `https://wa.me/${sanitizedNumber}`;
+  const service = document.querySelector('input[name="whatsappService"]:checked').value;
+  
+  let baseUrl = (service === 'web') 
+    ? `https://web.whatsapp.com/send?phone=` 
+    : `https://api.whatsapp.com/send?phone=`;
+
+  let link = `${baseUrl}${sanitizedNumber}`;
+  
   if (prefilledMessage) {
-    link += `?text=${encodeURIComponent(prefilledMessage)}`;
+    link += `&text=${encodeURIComponent(prefilledMessage)}`;
   }
-  const linkContainer = document.getElementById('generatedLinkContainer');
-  const linkInput = document.getElementById('generatedLink');
-  linkInput.value = link;
-  linkContainer.classList.remove('hidden');
+  
+  document.getElementById('generatedLink').value = link;
+  document.getElementById('generatedLinkContainer').classList.remove('hidden');
+
+  const qrcodeContainer = document.getElementById('qrcode');
+  qrcodeContainer.innerHTML = '';
+  qrcode = new QRCode(qrcodeContainer, {
+    text: link,
+    width: 150,
+    height: 150,
+  });
+  qrcodeContainer.classList.remove('hidden');
+  document.getElementById('qrActions').classList.remove('hidden');
 }
 
 function copyGeneratedLink() {
   const linkInput = document.getElementById('generatedLink');
-  const copyButton = document.getElementById('copyLink');
   navigator.clipboard.writeText(linkInput.value).then(() => {
-    copyButton.textContent = 'Copied!';
-    setTimeout(() => {
-      copyButton.textContent = 'Copy';
-    }, 2000);
+    showFeedback('Link copied to clipboard!', 'success');
   }).catch(err => {
     console.error('Failed to copy text: ', err);
     showFeedback('Failed to copy link', 'error');
   });
+}
+
+function downloadQRCode() {
+  const canvas = document.querySelector('#qrcode canvas');
+  if (!canvas) {
+    showFeedback('Generate a QR code first', 'error');
+    return;
+  }
+  const link = document.createElement('a');
+  link.download = 'whatsapp-qr-code.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+async function shareQRCode() {
+  const canvas = document.querySelector('#qrcode canvas');
+  if (!canvas) {
+    showFeedback('Generate a QR code first', 'error');
+    return;
+  }
+
+  canvas.toBlob(async (blob) => {
+    const file = new File([blob], 'whatsapp-qr-code.png', { type: 'image/png' });
+    const shareData = {
+      files: [file],
+      title: 'WhatsApp QR Code',
+    };
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      console.error("Share failed:", err.message);
+      showFeedback('Could not share QR code.', 'error');
+    }
+  }, 'image/png');
 }
 
 function showFeedback(message, type) {
