@@ -1,6 +1,10 @@
-# Whats Link+ - WA Easy Sender
+<h1 align="center">Whats Link+ - WA Easy Sender</h1>
 
-**Whats Link+** is a lightweight and user-friendly Chrome extension that makes it easy to send WhatsApp messages directly from your browser. Select any phone number on a webpage to quickly open a chat with your preferred settings.
+<h6 align="center">Whats Link+ is a lightweight and user-friendly Chrome extension that makes it easy to send WhatsApp messages directly from your browser. Select any phone number on a webpage to quickly open a chat with your preferred settings.</h6>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg">  <img src="https://img.shields.io/badge/Made%20with-JavaScript-blue">  <img src="https://img.shields.io/badge/Platform-Chromium%20Extension-green">  <img src="https://img.shields.io/github/issues/tuliosousapro/WhatsLink-Plus-WA-Easy-Sender">  <img src="https://img.shields.io/github/stars/tuliosousapro/WhatsLink-Plus-WA-Easy-Sender?style=social">
+</p>
 
 ---
 
@@ -29,7 +33,7 @@ Since this extension is not yet on the Chrome Web Store, you can install it manu
 
 ---
 
-## Usage Instructions
+## Getting Started Instructions
 
 ### Sending a Message
 
