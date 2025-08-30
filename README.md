@@ -56,3 +56,4 @@ This project is licensed under the MIT License.
 ## Disclaimer
 
 This is an independent project and is not officially affiliated with WhatsApp or Meta. Please read the full [Legal Disclaimer](DISCLAIMER.md).
+WhatsApp™ is a trademark of WhatsApp Inc., registered in the U.S. and other countries. This extension has no relationship to WhatsApp™ or WhatsApp Inc.
