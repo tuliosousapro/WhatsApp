@@ -4,37 +4,32 @@ body {
   padding: 10px;
   background-color: #f9f9f9;
 }
-
 .container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 h2, h3 {
   margin: 0;
   color: #333;
   text-align: center;
 }
-
 .input-group, .checkbox-group {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-
 label {
   font-weight: 500;
   color: #555;
 }
-
-input[type="text"], select {
+input[type="text"], select, textarea {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  font-family: inherit;
 }
-
 button {
   padding: 10px;
   background-color: #25D366;
@@ -45,11 +40,9 @@ button {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-
 button:hover {
   background-color: #1EBE57;
 }
-
 #recentNumbers {
   list-style: none;
   padding: 0;
@@ -58,7 +51,6 @@ button:hover {
   flex-direction: column;
   gap: 5px;
 }
-
 #recentNumbers li {
   background-color: #e9e9e9;
   padding: 8px;
@@ -66,54 +58,86 @@ button:hover {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-
 #recentNumbers li:hover {
   background-color: #dcdcdc;
 }
-
 #feedback {
   padding: 10px;
   border-radius: 4px;
   text-align: center;
   font-weight: bold;
 }
-
 #feedback.success {
   background-color: #d4edda;
   color: #155724;
 }
-
 #feedback.error {
   background-color: #f8d7da;
   color: #721c24;
 }
-
 .hidden {
   display: none;
 }
-
 .radio-group {
   display: flex;
   align-items: center;
   gap: 15px;
   padding-top: 5px;
 }
-
 .radio-group label {
   font-weight: normal;
   cursor: pointer;
 }
-
 .button-group {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 10px;
 }
-
 #saveDefaults {
   background-color: #6c757d;
 }
-
 #saveDefaults:hover {
   background-color: #5a6268;
+}
+.link-generator {
+  margin-top: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+.link-generator-title {
+  margin-bottom: 10px;
+}
+textarea {
+  resize: vertical;
+}
+#generateLink {
+  width: 100%;
+  margin-top: 10px;
+}
+#generatedLinkContainer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-top: 10px;
+}
+#generatedLink {
+  background-color: #eee;
+}
+#copyLink {
+  background-color: #007bff;
+}
+#copyLink:hover {
+  background-color: #0056b3;
+}
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+}
+.footer a {
+  color: #6c757d;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
 }

@@ -1,23 +1,9 @@
 const countryCodes = [
-  { name: "USA (+1)", value: "+1" },
-  { name: "UK (+44)", value: "+44" },
-  { name: "Brazil (+55)", value: "+55" },
-  { name: "Australia (+61)", value: "+61" },
-  { name: "Germany (+49)", value: "+49" },
-  { name: "India (+91)", value: "+91" },
-  { name: "France (+33)", value: "+33" },
-  { name: "Spain (+34)", value: "+34" },
-  { name: "Mexico (+52)", value: "+52" },
-  { name: "Portugal (+351)", value: "+351" },
+  { name: "USA (+1)", value: "+1" }, { name: "UK (+44)", value: "+44" }, { name: "Brazil (+55)", value: "+55" }, { name: "Australia (+61)", value: "+61" }, { name: "Germany (+49)", value: "+49" }, { name: "India (+91)", value: "+91" }, { name: "France (+33)", value: "+33" }, { name: "Spain (+34)", value: "+34" }, { name: "Mexico (+52)", value: "+52" }, { name: "Portugal (+351)", value: "+351" },
 ];
 
 const brazilianDDDs = [
-  '11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', 
-  '27', '28', '31', '32', '33', '34', '35', '37', '38', '41', '42', '43', 
-  '44', '45', '46', '47', '48', '49', '51', '53', '54', '55', '61', '62', 
-  '63', '64', '65', '66', '67', '68', '69', '71', '73', '74', '75', '77', 
-  '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '91', '92', 
-  '93', '94', '95', '96', '97', '98', '99'
+  '11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', '27', '28', '31', '32', '33', '34', '35', '37', '38', '41', '42', '43', '44', '45', '46', '47', '48', '49', '51', '53', '54', '55', '61', '62', '63', '64', '65', '66', '67', '68', '69', '71', '73', '74', '75', '77', '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '91', '92', '93', '94', '95', '96', '97', '98', '99'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -40,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('sendMessage').addEventListener('click', sendWhatsAppMessage);
   document.getElementById('saveDefaults').addEventListener('click', saveDefaultSettings);
+  document.getElementById('generateLink').addEventListener('click', generateWhatsAppLink);
+  document.getElementById('copyLink').addEventListener('click', copyGeneratedLink);
 });
 
 function initializeDefaults() {
@@ -81,7 +69,6 @@ function populateCountryCodes() {
 function detectAndSetCountryCode(number) {
   const phoneNumberInput = document.getElementById('phoneNumber');
   const countryCodeSelect = document.getElementById('countryCode');
-
   const sortedCodes = [...countryCodes].sort((a, b) => b.value.length - a.value.length);
   for (const country of sortedCodes) {
     if (number.startsWith(country.value)) {
@@ -90,20 +77,17 @@ function detectAndSetCountryCode(number) {
       return;
     }
   }
-
   if (number.length === 10) {
     countryCodeSelect.value = "+1";
     phoneNumberInput.value = number;
     return;
   }
-
   const ddd = number.substring(0, 2);
   if (number.length === 11 && brazilianDDDs.includes(ddd)) {
     countryCodeSelect.value = "+55";
     phoneNumberInput.value = number;
     return;
   }
-
   phoneNumberInput.value = number;
 }
 
@@ -132,21 +116,52 @@ function loadRecentNumbers() {
   });
 }
 
-function sendWhatsAppMessage() {
+function getFullNumber() {
   const numberInput = document.getElementById('phoneNumber');
   const countryCode = document.getElementById('countryCode').value;
   const number = numberInput.value.trim();
-
   if (!number) {
     showFeedback('Phone number is required', 'error');
-    return;
+    return null;
   }
+  return number.startsWith('+') ? number : `${countryCode}${number}`;
+}
 
-  const fullNumber = number.startsWith('+') ? number : `${countryCode}${number}`;
-
+function sendWhatsAppMessage() {
+  const fullNumber = getFullNumber();
+  if (!fullNumber) return;
   chrome.runtime.sendMessage({ action: 'openWhatsApp', number: fullNumber }, () => {
     updateRecentNumbers(fullNumber);
-    showFeedback('Opening WhatsApp...', 'success');
+    showFeedback('Opening WA...', 'success');
+  });
+}
+
+function generateWhatsAppLink() {
+  const fullNumber = getFullNumber();
+  if (!fullNumber) return;
+  const prefilledMessage = document.getElementById('prefilledMessage').value;
+  const sanitizedNumber = fullNumber.replace(/[^\d]/g, '');
+  let link = `https://wa.me/${sanitizedNumber}`;
+  if (prefilledMessage) {
+    link += `?text=${encodeURIComponent(prefilledMessage)}`;
+  }
+  const linkContainer = document.getElementById('generatedLinkContainer');
+  const linkInput = document.getElementById('generatedLink');
+  linkInput.value = link;
+  linkContainer.classList.remove('hidden');
+}
+
+function copyGeneratedLink() {
+  const linkInput = document.getElementById('generatedLink');
+  const copyButton = document.getElementById('copyLink');
+  navigator.clipboard.writeText(linkInput.value).then(() => {
+    copyButton.textContent = 'Copied!';
+    setTimeout(() => {
+      copyButton.textContent = 'Copy';
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+    showFeedback('Failed to copy link', 'error');
   });
 }
 

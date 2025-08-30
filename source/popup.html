@@ -32,6 +32,20 @@
     <div id="feedback" class="hidden"></div>
     <h3>Recent Numbers</h3>
     <ul id="recentNumbers"></ul>
+
+    <div class="link-generator">
+      <h3 class="link-generator-title">Link Generator</h3>
+      <div class="input-group">
+        <label for="prefilledMessage">Pre-filled Message (Optional):</label>
+        <textarea id="prefilledMessage" rows="3" placeholder="Hello! I'm interested in your product..."></textarea>
+      </div>
+      <button id="generateLink">Generate Link</button>
+      <div id="generatedLinkContainer" class="hidden">
+        <input type="text" id="generatedLink" readonly>
+        <button id="copyLink">Copy</button>
+      </div>
+    </div>
+
     <div class="footer">
       <a href="DISCLAIMER.md" target="_blank">Legal Disclaimer</a>
     </div>

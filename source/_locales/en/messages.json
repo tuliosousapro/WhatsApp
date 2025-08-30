@@ -8,7 +8,7 @@
     "description": "The description of the extension"
   },
   "contextMenuTitle": {
-    "message": "Send WhatsApp message to %s",
+    "message": "Send WA message to %s",
     "description": "The title of the context menu item"
   },
   "invalidPhoneNumber": {

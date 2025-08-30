@@ -10,7 +10,7 @@ chrome.runtime.onInstalled.addListener(() => {
   
   chrome.contextMenus.create({
     id: "sendWhatsAppMessage",
-    title: "Send WhatsApp message to %s",
+    title: "Send WA message to %s",
     contexts: ["selection"]
   });
 });
@@ -41,8 +41,6 @@ async function openWhatsAppChat(number) {
   let fullNumber = sanitizePhoneNumber(number);
 
   if (!fullNumber.startsWith('+')) {
-    // This heuristic logic is simplified here. The popup has the more complex logic.
-    // For context menu, we rely on the default if no '+' is present.
     const isTenDigit = /^\d{10}$/.test(fullNumber);
     const isElevenDigitBrazilian = /^\d{11}$/.test(fullNumber);
 

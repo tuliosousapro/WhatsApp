@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Whats Link+ - WA Easy Sender",
-  "version": "1.5",
+  "name": "__MSG_extName__",
+  "version": "1.6",
   "description": "A tool to quickly open chats from any web page.",
   "default_locale": "en",
   "permissions": [
@@ -24,7 +24,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Whats Link+ - WA Easy Sender",
+    "default_title": "__MSG_extName__",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
