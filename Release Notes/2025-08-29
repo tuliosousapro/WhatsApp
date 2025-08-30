@@ -1,12 +1,26 @@
 # Release Notes
 
-## v1.6.0 - 2025-08-29
+## v1.7.0 - 2025-08-29
 
-This release adds a powerful link and QR code generation suite to the extension's popup.
+This release introduces multi-language support, making the extension more accessible to a wider audience.
 
 ### Added
 
-* **Link Generator:** Users can now create shareable `wa.me` links with optional pre-filled text.
+* **Multi-Language Support:** The extension now fully supports English (en) and Brazilian Portuguese (pt-BR). It will automatically display in the user's browser language.
+
+### Changed
+
+* Refactored the UI (`popup.html` and `popup.js`) to use Chrome's native i18n API for all user-facing strings, ensuring efficient and seamless translation.
+
+---
+
+## v1.6.0 - 2025-08-29
+
+This release added a powerful link and QR code generation suite to the extension's popup.
+
+### Added
+
+* **Link Generator:** Users can now create shareable links with optional pre-filled text.
 * **QR Code Generation:** Instantly generate a scannable QR code for any created link.
 * **QR Code Actions:** Added buttons to **Download** the QR code as a PNG image or **Share** it using the native Web Share API.
 
